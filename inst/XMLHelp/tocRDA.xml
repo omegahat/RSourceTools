@@ -1,0 +1,61 @@
+<article xmlns:r="http://www.r-project.org">
+<title>Design of the toc for RDA</title>
+<para>
+
+The idea is that we don't have to read the entire contents of an RDA
+file into memory just to see what variables are there or then discard
+the elements we don' want.  Instead, we should be able get a table of
+contents from the RDA file without consuming the memory to store the
+values.  The format does not allow us to quickly jump from one element
+to the next.  When we an encounter the start of an element, i.e. the
+name, we then have to read the resulting object to find the start of
+the next element.  What we can do however is not create the object in
+memory but discard the content.  And further, we can determine the
+offset within the file, i.e. the number of bytes, at which each
+element starts.  Then we can return to the RDA file and jump directly
+to the particular elements we want.  So we want to be able to compute
+the offset table.
+
+</para>
+
+<para>
+We could define a new format which adds the table
+of contents to the end of the file.
+By putting the size of the table of contents at 
+the very end of the file, we can 
+then identify the table of contents quickly
+and further more append to the file. 
+Replacing an existing element is harder.
+</para>
+<para>
+See how this has been done in other approaches
+such as using a database (gdbm?), writing to separate
+files on disk (Brahm from MIT? RObjectTables)
+</para>
+<para>
+http://tolstoy.newcastle.edu.au/R/e2/help/07/05/16594.html
+</para>
+<section>
+<title>Details &amp; Notes</title>
+<para>
+The are REFSXP with the index in the value or following it
+as a separate integer.
+</para>
+<para>
+A degenerate function of the form
+<r:code>
+function(){}
+</r:code>
+appears to have a tag as well as an attribute.
+But the attributes flag is part of the packing.
+</para>
+<para>
+For a package environment (e.g. on a function)
+write out a flag PACKAGESXP and the name of the package as a string.
+</para>
+<para>
+For namespace environments, write a flag NAMESPACESXP
+and the name of the environment as a string.
+</para>
+</section>
+</article>

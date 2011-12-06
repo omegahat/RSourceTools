@@ -1,0 +1,12 @@
+Package: RSourceTools
+Project: Omegahat
+Version: 0.1-0
+Title: Tools for working with R code
+Description: Some tools that may be useful for working with and managing 
+ R code. 
+Depends: bitops
+Author: Duncan Temple Lang <duncan@wald.ucdavis.edu>
+Maintainer: Duncan Temple Lang <duncan@wald.ucdavis.edu>
+Copyright: Duncan Temple Lang, 2004. 
+License: BSD
+
